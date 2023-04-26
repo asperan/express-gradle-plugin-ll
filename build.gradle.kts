@@ -3,11 +3,11 @@ plugins {
 }
 
 express {
-    /*
     baseAppSourceFolder = "./src"
     mainRouteFileName = "main.ts"
     routesFolder = "routes"
     controllerFolder = "controllers"
+    /*
     route("/projects") {
         resourceName = "project"
         // import ...
