@@ -9,27 +9,35 @@ express {
     controllerFolder = "controllers"
     route("/projects") {
         resourceName = "project"
-        /*
         // import ...
         getAll {
-            // ..
+            """
+                
+            """
         }
 
         post {
-            // ..
+            """
+                
+            """
         }
 
         getOne {
-            // ..
+            """
+                
+            """
         }
 
         put {
-            // ..
+            """
+            
+            """
         }
 
         delete {
-            // ..
+            """
+                
+            """
         }
-        */
     }
 }
