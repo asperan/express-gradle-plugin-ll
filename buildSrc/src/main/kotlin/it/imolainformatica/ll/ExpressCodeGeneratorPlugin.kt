@@ -3,6 +3,7 @@
  */
 package it.imolainformatica.ll
 
+import it.imolainformatica.ll.extension.ExpressCodeGeneratorExtension
 import org.gradle.api.Project
 import org.gradle.api.Plugin
 
@@ -11,6 +12,9 @@ import org.gradle.api.Plugin
  */
 class ExpressCodeGeneratorPlugin: Plugin<Project> {
     override fun apply(project: Project) {
+        // Register the extension
+        project.extensions.create("express", ExpressCodeGeneratorExtension::class.java)
+
         // Register a task
         project.tasks.register("greeting") { task ->
             task.doLast {
