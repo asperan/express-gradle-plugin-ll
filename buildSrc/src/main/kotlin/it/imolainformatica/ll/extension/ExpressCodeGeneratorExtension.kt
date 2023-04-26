@@ -6,7 +6,21 @@ open class ExpressCodeGeneratorExtension {
     var baseAppSourceFolder = "./src"
     var mainRouteFileName = "main.ts"
     var routesFolder = "routes"
+        set(value) {
+            if (value == this.controllerFolder) {
+                throw IllegalStateException("The routes folder and the controller folder cannot have the same path.")
+            } else {
+                field = value
+            }
+        }
     var controllerFolder = "controllers"
+        set(value) {
+            if (value == this.routesFolder) {
+                throw IllegalStateException("The routes folder and the controller folder cannot have the same path.")
+            } else {
+                field = value
+            }
+        }
 
     var routeSpecs: MutableList<RouteSpec> = mutableListOf()
         private set
