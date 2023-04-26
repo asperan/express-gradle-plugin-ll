@@ -27,8 +27,8 @@ dependencies {
 gradlePlugin {
     // Define the plugin
     val greeting by plugins.creating {
-        id = "it.imolainformatica.ll.greeting"
-        implementationClass = "it.imolainformatica.ll.GradlePluginPlugin"
+        id = "it.imolainformatica.ll.ecg-plugin"
+        implementationClass = "it.imolainformatica.ll.ExpressCodeGeneratorPlugin"
     }
 }
 

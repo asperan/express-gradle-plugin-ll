@@ -9,12 +9,12 @@ import org.gradle.api.Plugin
 /**
  * A simple 'hello world' plugin.
  */
-class GradlePluginPlugin: Plugin<Project> {
+class ExpressCodeGeneratorPlugin: Plugin<Project> {
     override fun apply(project: Project) {
         // Register a task
         project.tasks.register("greeting") { task ->
             task.doLast {
-                println("Hello from plugin 'it.imolainformatica.ll.greeting'")
+                println("Hello from plugin 'it.imolainformatica.ll.ecg-plugin'")
             }
         }
     }
