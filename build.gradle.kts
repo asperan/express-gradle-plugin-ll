@@ -7,9 +7,9 @@ express {
     mainRouteFileName = "main.ts"
     routesFolder = "routes"
     controllerFolder = "controllers"
-    /*
     route("/projects") {
         resourceName = "project"
+        /*
         // import ...
         getAll {
             // ..
@@ -30,6 +30,6 @@ express {
         delete {
             // ..
         }
+        */
     }
-    */
 }
