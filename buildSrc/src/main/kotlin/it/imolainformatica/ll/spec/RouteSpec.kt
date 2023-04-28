@@ -5,14 +5,11 @@ import java.util.*
 open class RouteSpec(val routePath: String) {
     var resourceName = ""
 
-    var genericHandlers: MutableMap<String, String> = mutableMapOf()
-        private set
+    val genericHandlers: MutableMap<String, String> = mutableMapOf()
 
-    var specificHandlers: MutableMap<String, String> = mutableMapOf()
-        private set
+    val specificHandlers: MutableMap<String, String> = mutableMapOf()
 
-    var sideEffectImports: MutableList<String> = mutableListOf()
-        private set
+    val sideEffectImports: MutableList<String> = mutableListOf()
 
     val additionalImports: MutableList<String> = mutableListOf()
 
@@ -23,19 +20,6 @@ open class RouteSpec(val routePath: String) {
     fun delete(lazyBody: () -> String) = setSpecificHandler("delete", lazyBody)
 
     fun importSideEffects(from: String) = sideEffectImports.add(from)
-
-    private fun setGenericHandler(handlerBaseName: String, lazyBody: () -> String) =
-        setHandler(genericHandlers, handlerBaseName, lazyBody)
-
-    private fun setSpecificHandler(handlerBaseName: String, lazyBody: () -> String) =
-        setHandler(specificHandlers, handlerBaseName, lazyBody)
-
-    private fun setHandler(handlerSet: MutableMap<String, String>, handlerBaseName: String, lazyBody: () -> String) {
-        handlerSet[computeHandlerKey(handlerBaseName)] = lazyBody().trimIndent()
-    }
-
-    private fun computeHandlerKey(handlerBaseName: String) = handlerBaseName +
-            resourceName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
     fun import(vararg symbols: String): ImportStatement = when(symbols.size) {
         0 -> throw IllegalStateException("Import statements cannot have 0 arguments")
@@ -60,4 +44,17 @@ open class RouteSpec(val routePath: String) {
     class ImportSymbol(val symbol: String) : ImportStatement()
     class ImportList(val symbols: List<String>) : ImportStatement()
     class ImportAllRenamed(val newName: String) : ImportStatement()
+
+    private fun setGenericHandler(handlerBaseName: String, lazyBody: () -> String) =
+        setHandler(genericHandlers, handlerBaseName, lazyBody)
+
+    private fun setSpecificHandler(handlerBaseName: String, lazyBody: () -> String) =
+        setHandler(specificHandlers, handlerBaseName, lazyBody)
+
+    private fun setHandler(handlerSet: MutableMap<String, String>, handlerBaseName: String, lazyBody: () -> String) {
+        handlerSet[computeHandlerKey(handlerBaseName)] = lazyBody().trimIndent()
+    }
+
+    private fun computeHandlerKey(handlerBaseName: String) = handlerBaseName +
+            resourceName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 }
