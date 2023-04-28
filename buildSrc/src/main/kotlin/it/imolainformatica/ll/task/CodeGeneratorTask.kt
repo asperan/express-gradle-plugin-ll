@@ -16,14 +16,16 @@ open class CodeGeneratorTask : DefaultTask() {
         val mainRouteSetterCode = generateMainRouteSetterCode(configuration.routeSpecs)
         prepareRelativeFile("${configuration.baseAppSourceFolder}/${configuration.routesFolder}", "/${configuration.mainRouteFileName}")
             .writeText(mainRouteSetterCode, Charsets.UTF_8)
-        println(mainRouteSetterCode)
     }
 
     private fun generateRouteCode(routeSpec: RouteSpec) {
-        // TODO: Add imports to controller
         val controllerCode =
             """
                 import express from "express";
+                
+                ${routeSpec.sideEffectImports.joinToString("\n") { "import \"${it}\";" }}
+
+                ${routeSpec.additionalImports.joinToString("\n") { "import ${it};"}}
                 
             """.trimIndent() +
             (routeSpec.genericHandlers + routeSpec.specificHandlers).map { (key, value) ->
