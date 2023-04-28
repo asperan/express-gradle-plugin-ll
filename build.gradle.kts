@@ -9,7 +9,9 @@ express {
     controllerFolder = "controllers"
     route("/projects") {
         resourceName = "project"
-        // import ...
+        importSideEffects("test")
+        import("test") from "test-file"
+        import("*") renamedAs "good" from "test-file"
         getAll {
             """
                 
