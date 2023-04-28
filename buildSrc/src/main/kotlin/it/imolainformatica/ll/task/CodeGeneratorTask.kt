@@ -23,9 +23,9 @@ open class CodeGeneratorTask : DefaultTask() {
             """
                 import express from "express";
                 
-                ${routeSpec.sideEffectImports.joinToString("\n") { "import \"${it}\";" }}
+                ${routeSpec.sideEffectImports.joinToString("\n                ") { "import \"${it}\";" }}
 
-                ${routeSpec.additionalImports.joinToString("\n") { "import ${it};"}}
+                ${routeSpec.additionalImports.joinToString("\n                ") { "import ${it};"}}
                 
             """.trimIndent() +
             (routeSpec.genericHandlers + routeSpec.specificHandlers).map { (key, value) ->
@@ -43,11 +43,11 @@ open class CodeGeneratorTask : DefaultTask() {
                 
                 export default function ${generateRouteSetterName(routeSpec)}(app: express.Application): void {
                     app.route("${routeSpec.routePath}")
-                    ${routeSpec.genericHandlers.keys.joinToString("\n") {
+                    ${routeSpec.genericHandlers.keys.joinToString("\n                    ") {
                         "\t\t.${extractCrudVerb(it).toString().lowercase()}(Controller.${it})"
                     }};
                     app.route("${routeSpec.routePath}/:${routeSpec.resourceName}Id")
-                    ${routeSpec.specificHandlers.keys.joinToString("\n") {
+                    ${routeSpec.specificHandlers.keys.joinToString("\n                    ") {
                         "\t\t.${extractCrudVerb(it).toString().lowercase()}(Controller.${it})"
                     }};
                 }
