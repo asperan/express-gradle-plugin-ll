@@ -9,36 +9,33 @@ express {
     controllerFolder = "controllers"
     route("/projects") {
         resourceName = "project"
-        importSideEffects("test")
-        import("test") from "test-file"
-        import("*") renamedAs "good" from "test-file"
         getAll {
             """
-                
+                response.send("get all projects");
             """
         }
 
         post {
             """
-                
+                response.send("post a new project");
             """
         }
 
         getOne {
             """
-                
+                response.send("get project details for id: " + request.params.${resourceName}Id);
             """
         }
 
         put {
             """
-            
+                response.send("put project details for id: " + request.params.${resourceName}Id);
             """
         }
 
         delete {
             """
-                
+                response.send("delete project for id: " + request.params.${resourceName}Id);
             """
         }
     }
