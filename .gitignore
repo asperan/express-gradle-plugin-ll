@@ -7,3 +7,9 @@ build
 # Ignore generated code files
 src/controllers
 src/routes
+
+# Ignore Idea folder
+.idea
+
+# Ignore Typescript compilation result files
+dist
