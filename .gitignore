@@ -13,3 +13,6 @@ src/routes
 
 # Ignore Typescript compilation result files
 dist
+
+# Ignore node_modules
+node_modules
